@@ -1,4 +1,6 @@
 const express = require("express");
+const router = express.Router();
+
 const upload = require("../middleware/upload");
 
 const {
@@ -6,14 +8,12 @@ const {
   getPetReports,
   getPetReportById,
   updatePetReport,
-  deletePetReport
+  deletePetReport,
 } = require("../controllers/petReportController");
 
-const router = express.Router();
 router.post("/", upload.single("image"), createPetReport);
 router.get("/", getPetReports);
 router.get("/:id", getPetReportById);
-router.patch("/:id", updatePetReport);
+router.patch("/:id", upload.single("image"), updatePetReport);
 router.delete("/:id", deletePetReport);
-
 module.exports = router;
