@@ -3,11 +3,14 @@ const PetReport = require("../models/PetReport");
 
 const createPetReport = async (req, res) => {
   try {
-    const petReport = new PetReport(req.body);
+    const petReport = new PetReport({
+      ...req.body,
+      image: req.file ? req.file.path : null
+    });
 
-    const savedPetReport = await petReport.save();
+    const savedReport = await petReport.save();
 
-    res.status(201).json(savedPetReport);
+    res.status(201).json(savedReport);
   } catch (error) {
     res.status(400).json({
       message: "Failed to create pet report",

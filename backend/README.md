@@ -148,3 +148,11 @@ The current modules support the following CRUD operations:
 - DELETE - Delete an item
 
 The current modules have been tested using Postman.
+
+
+## Features
+
+- CRUD operations for Pet Reports, Found Pet Reports, Claims, and Rescue Cases
+- Image upload for Pet Reports using Multer
+- Uploaded image path saved with the Pet Report in MongoDB
+- API testing using Postman

@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../middleware/upload");
 
 const {
   createPetReport,
@@ -9,7 +10,7 @@ const {
 } = require("../controllers/petReportController");
 
 const router = express.Router();
-router.post("/", createPetReport);
+router.post("/", upload.single("image"), createPetReport);
 router.get("/", getPetReports);
 router.get("/:id", getPetReportById);
 router.patch("/:id", updatePetReport);
