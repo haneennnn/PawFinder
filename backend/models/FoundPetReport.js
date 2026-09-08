@@ -39,6 +39,16 @@ const foundPetReportSchema = new mongoose.Schema(
       type: String,
       enum: ["found", "reunited"],
       default: "found"
+    },
+
+    image: {
+      type: String
+    },
+
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
     }
   },
   {

@@ -1,19 +1,51 @@
 const express = require("express");
+
 const router = express.Router();
 
 const upload = require("../middleware/upload");
+const protect = require("../middleware/authMiddleware");
 
 const {
   createPetReport,
   getPetReports,
   getPetReportById,
   updatePetReport,
-  deletePetReport,
+  deletePetReport
 } = require("../controllers/petReportController");
 
-router.post("/", upload.single("image"), createPetReport);
+
+// Create - Login required
+router.post(
+  "/",
+  protect,
+  upload.single("image"),
+  createPetReport
+);
+
+
+// Get all - Public
 router.get("/", getPetReports);
+
+
+// Get by ID - Public
 router.get("/:id", getPetReportById);
-router.patch("/:id", upload.single("image"), updatePetReport);
-router.delete("/:id", deletePetReport);
+
+
+// Update - Login required
+router.patch(
+  "/:id",
+  protect,
+  upload.single("image"),
+  updatePetReport
+);
+
+
+// Delete - Login required
+router.delete(
+  "/:id",
+  protect,
+  deletePetReport
+);
+
+
 module.exports = router;

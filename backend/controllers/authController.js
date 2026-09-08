@@ -4,7 +4,7 @@ const generateToken = require("../utils/generateToken");
 
 const signup = async (req, res) => {
   try {
-    const { name, email, password, phone, role } = req.body;
+    const { name, email, password, phone } = req.body;
 
     const existingUser = await User.findOne({ email });
 
@@ -21,7 +21,6 @@ const signup = async (req, res) => {
       email,
       password: hashedPassword,
       phone,
-      role,
     });
 
     const token = generateToken(user._id);

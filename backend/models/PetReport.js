@@ -38,8 +38,15 @@ const petReportSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
+
     image: {
       type: String
+    },
+
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
     }
   },
   {

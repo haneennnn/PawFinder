@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const path = require("path");
 
 const connectDB = require("./config/db-connect");
 const petReportRoutes = require("./routes/petReportRoutes");
@@ -9,15 +10,16 @@ const rescueCaseRoutes = require("./routes/rescueCaseRoutes");
 const foundPetReportRoutes = require("./routes/foundPetReportRoutes");
 const authRoutes = require("./routes/authRoutes");
 const app = express();
-
 connectDB();
 
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/v1/rescueCases", rescueCaseRoutes);
 app.use("/api/v1/claims", claimRoutes);
 app.use("/api/v1/petReports", petReportRoutes);
 app.use("/api/v1/foundPetReports", foundPetReportRoutes);
 app.use("/api/v1/auth", authRoutes);
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
